@@ -19,15 +19,16 @@ const authenticate = async (req, res, next) => {
       return createError(401, "You are unauthorized");
     }
 
-    const payload = jwt.verify(token, process.env.SECRET_KEY);
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     console.log(payload);
 
+    
     if (
       typeof payload !== "object" ||
       !payload?.id ||
-      typeof payload.id !== "string"
+      typeof payload.id !== "number"
     ) {
-      return createError(400, "Payload is invalid");
+      return createError(400, "Payload not in conrect is invalid");
     }
 
     const user = await userService.getUserById(payload.id);

@@ -1,6 +1,6 @@
 const prisma =require("../config/prisma");
 
-const getUserById = (id) =>{
+exports.getUserById = (id) =>{
     return prisma.user.findFirst({
         where:{
             id,
